@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / output
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+/.idea/
+/.vscode/
+
+# Python (virtualenvs, caches)
+venv/
+env/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Optional: package lock
+# package-lock.json
+
+# Misc
+*.sqlite3
+*.db
+*.tgz
+*.zip

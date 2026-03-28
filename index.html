@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Portafolio profesional de Ing. Jorge Ignacio Garcia Vega — Desarrollador Web Front-end">
+    <title>Jorge Garcia Vega — Desarrollador Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+  </head>
+  <body>
+
+    <!-- Barra de progreso de scroll -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="site-header" id="siteHeader">
+      <div class="container header-inner">
+        <div class="logo">
+          <img src="styles/logo.png" alt="Logo Jorge Garcia Vega">
+        </div>
+        <nav class="nav" id="mainNav">
+          <a href="#sobre">Sobre</a>
+          <a href="#habilidades">Habilidades</a>
+          <a href="#historial">Historial</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ── Hero ───────────────────────────────────────────── -->
+      <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-inner">
+          <div class="hero-avatar">JG</div>
+          <div class="hero-text">
+            <p class="hero-eyebrow">¡Hola, soy</p>
+            <h1 class="name">Ing. Jorge Ignacio<br><span class="gradient-text">Garcia Vega</span></h1>
+            <p class="lead"><span id="typed"></span><span class="cursor">|</span></p>
+            <div class="hero-actions">
+              <a class="btn" href="cv.pdf" download>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Descargar CV
+              </a>
+              <a class="btn ghost" href="#historial">Ver historial</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container sections-wrapper">
+
+        <!-- ── Sobre mí ───────────────────────────────────────── -->
+        <section id="sobre" class="card reveal">
+          <span class="card-label">01</span>
+          <h3>Sobre mí</h3>
+          <p>Soy desarrollador web con experiencia en front-end y diseño de interfaces. Me apasiona construir productos digitales con excelente experiencia de usuario, código limpio y diseño moderno. Busco proyectos desafiantes donde pueda aportar creatividad y soluciones técnicas de alto impacto.</p>
+          <div class="about-tags">
+            <span class="tag">💡 Apasionado del diseño</span>
+            <span class="tag">⚡ Código limpio</span>
+            <span class="tag">🚀 Orientado a resultados</span>
+            <span class="tag">🌐 Siempre aprendiendo</span>
+          </div>
+        </section>
+
+        <!-- ── Habilidades ────────────────────────────────────── -->
+        <section id="habilidades" class="card reveal">
+          <span class="card-label">02</span>
+          <h3>Habilidades</h3>
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h4>Front-end</h4>
+              <div class="skill-bar">
+                <span class="skill-name">HTML / CSS</span>
+                <div class="bar"><div class="bar-fill" data-w="95"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-name">JavaScript</span>
+                <div class="bar"><div class="bar-fill" data-w="90"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-name">React</span>
+                <div class="bar"><div class="bar-fill" data-w="85"></div></div>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4>Herramientas</h4>
+              <div class="skill-bar">
+                <span class="skill-name">Git / GitHub</span>
+                <div class="bar"><div class="bar-fill" data-w="88"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-name">Figma / UI-UX</span>
+                <div class="bar"><div class="bar-fill" data-w="80"></div></div>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-name">Node.js</span>
+                <div class="bar"><div class="bar-fill" data-w="70"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Git</span>
+            <span class="tech-badge">Figma</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Tailwind CSS</span>
+          </div>
+        </section>
+
+        <!-- ── Historial ──────────────────────────────────────── -->
+        <section id="historial" class="card reveal">
+          <span class="card-label">03</span>
+          <h3>Historial</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <h4>Empresa A — Desarrollador Front-end</h4>
+                  <time datetime="2019-01" class="timeline-time">2019 — Presente</time>
+                </div>
+                <p>Descripción breve de responsabilidades y logros destacados en este puesto.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <h4>Empresa B — Diseñador UI</h4>
+                  <time datetime="2016-01" class="timeline-time">2016 — 2018</time>
+                </div>
+                <p>Descripción breve de responsabilidades y logros destacados en este puesto.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <h4>Empresa C — Prácticas Profesionales</h4>
+                  <time datetime="2015-01" class="timeline-time">2015 — 2016</time>
+                </div>
+                <p>Descripción breve de responsabilidades y logros destacados en este puesto.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Proyectos ──────────────────────────────────────── -->
+        <section id="proyectos" class="card reveal">
+          <span class="card-label">04</span>
+          <h3>Proyectos</h3>
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="project-icon">🌐</div>
+              <h4>Proyecto Web App</h4>
+              <p>Aplicación web con React, diseño responsive y API integrada.</p>
+              <div class="project-tags">
+                <span class="tech-badge sm">React</span>
+                <span class="tech-badge sm">CSS3</span>
+                <span class="tech-badge sm">API REST</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="proj-link">Demo →</a>
+                <a href="#" class="proj-link">GitHub →</a>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">📱</div>
+              <h4>Landing Page</h4>
+              <p>Página de aterrizaje optimizada con animaciones CSS y alta conversión.</p>
+              <div class="project-tags">
+                <span class="tech-badge sm">HTML</span>
+                <span class="tech-badge sm">CSS</span>
+                <span class="tech-badge sm">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="proj-link">Demo →</a>
+                <a href="#" class="proj-link">GitHub →</a>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">⚡</div>
+              <h4>Dashboard Admin</h4>
+              <p>Panel de administración con gráficas, tablas dinámicas y modo oscuro.</p>
+              <div class="project-tags">
+                <span class="tech-badge sm">React</span>
+                <span class="tech-badge sm">Node.js</span>
+                <span class="tech-badge sm">Chart.js</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="proj-link">Demo →</a>
+                <a href="#" class="proj-link">GitHub →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Educación ──────────────────────────────────────── -->
+        <section id="curriculum" class="card reveal">
+          <span class="card-label">05</span>
+          <h3>Educación</h3>
+          <div class="edu-list">
+            <div class="edu-item">
+              <span class="edu-icon">🎓</span>
+              <div>
+                <strong>Ingeniería — Universidad (Año de graduación)</strong>
+                <p>Especialidad en tecnologías web y desarrollo de software.</p>
+              </div>
+            </div>
+            <div class="edu-item">
+              <span class="edu-icon">📜</span>
+              <div>
+                <strong>Certificación — Plataforma (Año)</strong>
+                <p>Certificación en desarrollo web moderno.</p>
+              </div>
+            </div>
+          </div>
+          <div class="lang-list">
+            <span class="lang-badge">🇲🇽 Español — Nativo</span>
+            <span class="lang-badge">🇺🇸 Inglés — Avanzado</span>
+          </div>
+        </section>
+
+        <!-- ── Contacto ───────────────────────────────────────── -->
+        <section id="contacto" class="card reveal">
+          <span class="card-label">06</span>
+          <h3>Contacto</h3>
+          <p class="contact-intro">¿Tienes un proyecto en mente? Hablemos.</p>
+          <div class="contact-grid">
+            <a href="mailto:ejemplo@correo.com" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              ejemplo@correo.com
+            </a>
+            <a href="#" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="#" class="contact-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </section>
+
+      </div><!-- /sections-wrapper -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© 2026 Jorge Ignacio Garcia Vega</span>
+        <span class="footer-made">Diseñado &amp; construido con ❤️</span>
+      </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

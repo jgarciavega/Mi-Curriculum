@@ -16,7 +16,7 @@ export default function LoginPage() {
     setError('')
     const res = await signIn('credentials', { email, password, redirect: false })
     if (res?.ok) {
-      router.push('/admin')
+      window.location.href = '/admin'
     } else {
       setError('Credenciales incorrectas')
       setLoading(false)

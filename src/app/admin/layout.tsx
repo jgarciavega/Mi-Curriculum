@@ -1,6 +1,7 @@
-import { auth, signOut } from '@/lib/auth'
+import { auth } from '@/lib/auth'
 import Link from 'next/link'
 import AdminNav from '@/components/admin/AdminNav'
+import SignOutButton from '@/components/admin/SignOutButton'
 import { redirect } from 'next/navigation'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -22,11 +23,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all" style={{ color: 'var(--muted)' }}>
             👁️ Ver sitio
           </Link>
-          <form action={async () => { 'use server'; await signOut({ redirectTo: '/admin/login' }) }}>
-            <button type="submit" className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm" style={{ color: '#f87171' }}>
-              🚪 Cerrar sesión
-            </button>
-          </form>
+          <SignOutButton />
         </div>
       </aside>
 

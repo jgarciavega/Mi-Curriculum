@@ -1,9 +1,11 @@
 import { auth, signOut } from '@/lib/auth'
 import Link from 'next/link'
 import AdminNav from '@/components/admin/AdminNav'
+import { redirect } from 'next/navigation'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
+  if (!session) redirect('/admin/login')
 
   return (
     <div className="min-h-screen flex" style={{ background: 'var(--bg)' }}>

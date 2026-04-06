@@ -2,16 +2,20 @@ import { createClient } from '@supabase/supabase-js'
 import Link from 'next/link'
 
 async function getStats() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-  const [p, s, t] = await Promise.all([
-    supabase.from('projects').select('id', { count: 'exact' }),
-    supabase.from('skills').select('id', { count: 'exact' }),
-    supabase.from('timeline').select('id', { count: 'exact' }),
-  ])
-  return { projects: p.count ?? 0, skills: s.count ?? 0, timeline: t.count ?? 0 }
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+    const [p, s, t] = await Promise.all([
+      supabase.from('projects').select('id', { count: 'exact' }),
+      supabase.from('skills').select('id', { count: 'exact' }),
+      supabase.from('timeline').select('id', { count: 'exact' }),
+    ])
+    return { projects: p.count ?? 0, skills: s.count ?? 0, timeline: t.count ?? 0 }
+  } catch {
+    return { projects: 0, skills: 0, timeline: 0 }
+  }
 }
 
 export default async function AdminDashboard() {

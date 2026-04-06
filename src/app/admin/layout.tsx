@@ -5,6 +5,11 @@ import AdminNav from '@/components/admin/AdminNav'
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
 
+  // Login page: render without sidebar
+  if (!session?.user?.email) {
+    return <>{children}</>
+  }
+
   return (
     <div className="min-h-screen flex" style={{ background: 'var(--bg)' }}>
       {/* Sidebar */}

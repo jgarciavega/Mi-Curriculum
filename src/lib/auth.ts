@@ -10,8 +10,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials) {
         if (
-          credentials?.email    === process.env.ADMIN_EMAIL &&
-          credentials?.password === process.env.ADMIN_PASSWORD
+          credentials?.email?.toString().trim()    === process.env.ADMIN_EMAIL?.trim() &&
+          credentials?.password?.toString().trim() === process.env.ADMIN_PASSWORD?.trim()
         ) {
           return { id: '1', name: 'Admin', email: credentials.email as string }
         }

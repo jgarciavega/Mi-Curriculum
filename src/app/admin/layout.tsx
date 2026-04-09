@@ -1,6 +1,7 @@
 import { auth } from '@/lib/auth'
 import Link from 'next/link'
 import AdminNav from '@/components/admin/AdminNav'
+import { signOutAction } from '@/app/actions/auth'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
@@ -25,14 +26,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all" style={{ color: 'var(--muted)' }}>
             👁️ Ver sitio
           </Link>
-          {/* Plain HTML link - no JS needed, full page navigation */}
-          <a
-            href="/api/logout"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm"
-            style={{ color: '#f87171' }}
-          >
-            🚪 Cerrar sesión
-          </a>
+          <form action={signOutAction}>
+            <button
+              type="submit"
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-left"
+              style={{ color: '#f87171', background: 'transparent', border: 'none', cursor: 'pointer' }}
+            >
+              🚪 Cerrar sesión
+            </button>
+          </form>
         </div>
       </aside>
 

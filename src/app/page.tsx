@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Header from '@/components/cv/Header'
 import Hero from '@/components/cv/Hero'
 import Sections from '@/components/cv/Sections'

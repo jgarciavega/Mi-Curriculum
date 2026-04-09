@@ -157,8 +157,8 @@ export default function Sections({ projects, skills, timeline, education, contac
         <div className="grid md:grid-cols-3 gap-4">
           {[
             { icon: '✉️', label: contact?.email        ?? 'ejemplo@correo.com', href: `mailto:${contact?.email ?? ''}` },
-            { icon: '💼', label: 'LinkedIn',             href: contact?.linkedin_url ?? '#' },
-            { icon: '🐙', label: 'GitHub',               href: contact?.github_url   ?? '#' },
+            { icon: '💼', label: contact?.linkedin_url  ?? '#',                  href: contact?.linkedin_url ?? '#' },
+            { icon: '🐙', label: contact?.github_url    ?? '#',                  href: contact?.github_url   ?? '#' },
           ].map(c => (
             <a key={c.label} href={c.href} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:scale-105"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>

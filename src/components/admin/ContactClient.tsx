@@ -9,6 +9,7 @@ const empty: Omit<Contact, 'id'> = { email: '', linkedin_url: '', github_url: ''
 export default function ContactClient({ initialContact }: Props) {
   const [saved, setSaved]   = useState(false)
   const [loading, setLoading] = useState(false)
+  const [currentId, setCurrentId] = useState<string | undefined>(initialContact?.id)
   const [form, setForm]     = useState<Omit<Contact, 'id'>>(
     initialContact
       ? { email: initialContact.email, linkedin_url: initialContact.linkedin_url, github_url: initialContact.github_url, intro: initialContact.intro }
@@ -18,8 +19,10 @@ export default function ContactClient({ initialContact }: Props) {
   async function save() {
     setLoading(true)
     setSaved(false)
-    const body = initialContact ? { ...form, id: initialContact.id } : form
-    await fetch('/api/content/contact', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+    const body = currentId ? { ...form, id: currentId } : form
+    const res = await fetch('/api/content/contact', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+    const data = await res.json()
+    if (data?.id) setCurrentId(data.id)
     setLoading(false)
     setSaved(true)
     setTimeout(() => setSaved(false), 3000)

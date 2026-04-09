@@ -15,10 +15,18 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
   const body = await req.json()
   const { id, ...rest } = body
-  const { data, error } = id
-    ? await admin().from('contact').update(rest).eq('id', id).select().single()
-    : await admin().from('contact').insert(body).select().single()
+
+  // Always try to find existing row first to avoid duplicates
+  let contactId = id
+  if (!contactId) {
+    const { data: existing } = await admin().from('contact').select('id').limit(1).single()
+    contactId = existing?.id
+  }
+
+  const { data, error } = contactId
+    ? await admin().from('contact').update(rest).eq('id', contactId).select().single()
+    : await admin().from('contact').insert(rest).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
-  revalidatePath('/')
+  revalidatePath('/', 'layout')
   return NextResponse.json(data)
 }

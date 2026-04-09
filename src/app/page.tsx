@@ -1,6 +1,7 @@
 import Header from '@/components/cv/Header'
 import Hero from '@/components/cv/Hero'
 import Sections from '@/components/cv/Sections'
+import AdminShortcut from '@/components/AdminShortcut'
 import { defaultProjects, defaultSkills, defaultTimeline, defaultEducation } from '@/lib/defaultData'
 import { createClient } from '@supabase/supabase-js'
 
@@ -48,6 +49,7 @@ export default async function Home() {
           <span>Diseñado &amp; construido con ❤️</span>
         </div>
       </footer>
+      <AdminShortcut />
     </>
   )
 }

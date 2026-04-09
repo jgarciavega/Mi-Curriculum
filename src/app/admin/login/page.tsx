@@ -32,15 +32,14 @@ export default function LoginPage() {
           <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>Ingresa tus credenciales</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
           <div>
             <label className="text-sm font-medium block mb-1" style={{ color: 'var(--muted)' }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2.5 rounded-xl text-sm outline-none focus:ring-2"
+              autoComplete="off"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text)' }}
             />
           </div>
@@ -50,8 +49,8 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
+              autoComplete="new-password"
               required
-              className="w-full px-4 py-2.5 rounded-xl text-sm outline-none"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text)' }}
             />
           </div>

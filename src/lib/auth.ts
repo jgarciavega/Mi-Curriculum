@@ -10,11 +10,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (
-          credentials?.email?.toString().trim()    === process.env.ADMIN_EMAIL?.trim() &&
-          credentials?.password?.toString().trim() === process.env.ADMIN_PASSWORD?.trim()
-        ) {
-          return { id: '1', name: 'Admin', email: credentials.email as string }
+        const adminEmail    = process.env.ADMIN_EMAIL?.trim()
+        const adminPassword = process.env.ADMIN_PASSWORD?.trim()
+
+        // Reject immediately if env vars are not configured
+        if (!adminEmail || !adminPassword) return null
+
+        const inputEmail    = credentials?.email?.toString().trim()
+        const inputPassword = credentials?.password?.toString().trim()
+
+        if (!inputEmail || !inputPassword) return null
+
+        if (inputEmail === adminEmail && inputPassword === adminPassword) {
+          return { id: '1', name: 'Admin', email: inputEmail }
         }
         return null
       },

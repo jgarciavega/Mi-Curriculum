@@ -3,10 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const links = [
-  { href: '/admin',          icon: '📊', label: 'Dashboard' },
-  { href: '/admin/projects', icon: '🌐', label: 'Proyectos' },
-  { href: '/admin/skills',   icon: '⚡', label: 'Habilidades' },
-  { href: '/admin/timeline', icon: '📋', label: 'Historial' },
+  { href: '/admin',           icon: '📊', label: 'Dashboard' },
+  { href: '/admin/projects',  icon: '🌐', label: 'Proyectos' },
+  { href: '/admin/skills',    icon: '⚡', label: 'Habilidades' },
+  { href: '/admin/timeline',  icon: '📋', label: 'Historial' },
+  { href: '/admin/education', icon: '🎓', label: 'Educación' },
+  { href: '/admin/contact',   icon: '✉️', label: 'Contacto' },
 ]
 
 export default function AdminNav() {

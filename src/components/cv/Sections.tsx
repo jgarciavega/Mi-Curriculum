@@ -1,10 +1,11 @@
-import { Project, Skill, TimelineItem, Education } from '@/types'
+import { Project, Skill, TimelineItem, Education, Contact } from '@/types'
 
 interface Props {
   projects: Project[]
   skills: Skill[]
   timeline: TimelineItem[]
   education: Education[]
+  contact: Contact | null
 }
 
 const cardStyle: React.CSSProperties = {
@@ -29,7 +30,7 @@ const labelStyle: React.CSSProperties = {
   marginBottom: '1rem',
 }
 
-export default function Sections({ projects, skills, timeline, education }: Props) {
+export default function Sections({ projects, skills, timeline, education, contact }: Props) {
   const frontendSkills = skills.filter(s => s.category === 'frontend')
   const toolSkills = skills.filter(s => s.category === 'tools')
 
@@ -152,12 +153,12 @@ export default function Sections({ projects, skills, timeline, education }: Prop
       <section id="contacto" style={cardStyle}>
         <span style={labelStyle}>06</span>
         <h3 className="text-xl font-bold mb-2">Contacto</h3>
-        <p className="mb-6" style={{ color: 'var(--muted)' }}>¿Tienes un proyecto en mente? Hablemos.</p>
+        <p className="mb-6" style={{ color: 'var(--muted)' }}>{contact?.intro ?? '¿Tienes un proyecto en mente? Hablemos.'}</p>
         <div className="grid md:grid-cols-3 gap-4">
           {[
-            { icon: '✉️', label: 'ejemplo@correo.com', href: 'mailto:ejemplo@correo.com' },
-            { icon: '💼', label: 'LinkedIn', href: '#' },
-            { icon: '🐙', label: 'GitHub', href: '#' },
+            { icon: '✉️', label: contact?.email        ?? 'ejemplo@correo.com', href: `mailto:${contact?.email ?? ''}` },
+            { icon: '💼', label: 'LinkedIn',             href: contact?.linkedin_url ?? '#' },
+            { icon: '🐙', label: 'GitHub',               href: contact?.github_url   ?? '#' },
           ].map(c => (
             <a key={c.label} href={c.href} className="flex items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:scale-105"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>

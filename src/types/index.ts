@@ -33,9 +33,18 @@ export interface Education {
   icon: string
 }
 
+export interface Contact {
+  id: string
+  email: string
+  linkedin_url: string
+  github_url: string
+  intro: string
+}
+
 export interface SiteData {
   projects: Project[]
   skills: Skill[]
   timeline: TimelineItem[]
   education: Education[]
+  contact: Contact | null
 }

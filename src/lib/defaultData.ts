@@ -1,4 +1,4 @@
-import { Project, Skill, TimelineItem, Education } from '@/types'
+import { Project, Skill, TimelineItem, Education, Contact } from '@/types'
 
 export const defaultProjects: Project[] = [
   { id: '1', title: 'Proyecto Web', description: 'Aplicación web con React, diseño responsive y API integrada.', icon: '🌐', tags: ['React','CSS3','API REST'], demo_url: '#', github_url: '#', order: 1 },
@@ -25,3 +25,11 @@ export const defaultEducation: Education[] = [
   { id: '1', title: 'Ingeniería en Desarrollo de Software (2024)', description: 'Especialidad en tecnologías web y móvil, desarrollo de software.', year: '2024', icon: '🎓' },
   { id: '2', title: 'Certificación — Plataforma (2026)',           description: 'Certificación en desarrollo web moderno.', year: '2026', icon: '📜' },
 ]
+
+export const defaultContact: Contact = {
+  id: '1',
+  email: 'ejemplo@correo.com',
+  linkedin_url: '#',
+  github_url: '#',
+  intro: '¿Tienes un proyecto en mente? Hablemos.',
+}

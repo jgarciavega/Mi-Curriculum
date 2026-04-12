@@ -7,6 +7,12 @@ const admin = () => createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
+export async function GET() {
+  const { data, error } = await admin().from('education').select('*').order('year')
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 })
+  return NextResponse.json(data ?? [])
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const { data, error } = await admin().from('education').insert(body).select().single()

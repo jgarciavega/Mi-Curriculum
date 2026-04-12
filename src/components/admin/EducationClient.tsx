@@ -12,20 +12,31 @@ export default function EducationClient({ initialEducation }: Props) {
   const [form, setForm]       = useState<Omit<Education, 'id'>>(empty)
   const [showForm, setShowForm] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
-  function openNew()         { setEditing(null); setForm(empty); setShowForm(true) }
-  function openEdit(e: Education) { setEditing(e); setForm({ title: e.title, description: e.description, year: e.year, icon: e.icon }); setShowForm(true) }
+  function openNew()         { setEditing(null); setForm(empty); setSaveError(null); setShowForm(true) }
+  function openEdit(e: Education) { setEditing(e); setForm({ title: e.title, description: e.description, year: e.year, icon: e.icon }); setSaveError(null); setShowForm(true) }
 
   async function save() {
     setLoading(true)
-    const method = editing ? 'PUT' : 'POST'
-    const body   = editing ? { ...form, id: editing.id } : form
-    const res    = await fetch('/api/content/education', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-    const data   = await res.json()
-    if (editing) setItems(prev => prev.map(i => i.id === editing.id ? data : i))
-    else         setItems(prev => [...prev, data])
-    setShowForm(false)
-    setLoading(false)
+    setSaveError(null)
+    try {
+      const method = editing ? 'PUT' : 'POST'
+      const body   = editing ? { ...form, id: editing.id } : form
+      const res    = await fetch('/api/content/education', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      const data   = await res.json()
+      if (!res.ok || data?.error) {
+        setSaveError(data?.error ?? 'Error al guardar. Revisa la configuración del servidor.')
+        return
+      }
+      if (editing) setItems(prev => prev.map(i => i.id === editing.id ? data : i))
+      else         setItems(prev => [...prev, data])
+      setShowForm(false)
+    } catch {
+      setSaveError('Error de conexión. Inténtalo de nuevo.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   async function remove(id: string) {
@@ -88,6 +99,9 @@ export default function EducationClient({ initialEducation }: Props) {
               ))}
             </div>
             <div className="flex gap-3 mt-5 justify-end">
+              {saveError && (
+                <span className="text-sm flex items-center mr-auto" style={{ color: '#f87171' }}>✗ {saveError}</span>
+              )}
               <button onClick={() => setShowForm(false)} className="px-4 py-2 rounded-xl text-sm" style={{ color: 'var(--muted)' }}>Cancelar</button>
               <button onClick={save} disabled={loading} className="px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-50"
                 style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-2))', color: '#fff' }}>

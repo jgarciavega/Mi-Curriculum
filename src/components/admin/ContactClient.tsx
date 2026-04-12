@@ -7,7 +7,8 @@ interface Props { initialContact: Contact | null }
 const empty: Omit<Contact, 'id'> = { email: '', linkedin_url: '', github_url: '', intro: '¿Tienes un proyecto en mente? Hablemos.' }
 
 export default function ContactClient({ initialContact }: Props) {
-  const [saved, setSaved]   = useState(false)
+  const [saved, setSaved]     = useState(false)
+  const [error, setError]     = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [currentId, setCurrentId] = useState<string | undefined>(initialContact?.id)
   const [form, setForm]     = useState<Omit<Contact, 'id'>>(
@@ -19,13 +20,23 @@ export default function ContactClient({ initialContact }: Props) {
   async function save() {
     setLoading(true)
     setSaved(false)
-    const body = currentId ? { ...form, id: currentId } : form
-    const res = await fetch('/api/content/contact', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
-    const data = await res.json()
-    if (data?.id) setCurrentId(data.id)
-    setLoading(false)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 3000)
+    setError(null)
+    try {
+      const body = currentId ? { ...form, id: currentId } : form
+      const res  = await fetch('/api/content/contact', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      const data = await res.json()
+      if (!res.ok || data?.error) {
+        setError(data?.error ?? 'Error al guardar. Revisa la configuración del servidor.')
+        return
+      }
+      if (data?.id) setCurrentId(data.id)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 3000)
+    } catch {
+      setError('Error de conexión. Inténtalo de nuevo.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const inputStyle = { background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text)', borderRadius: 8, padding: '0.6rem 0.75rem', width: '100%', fontSize: '0.875rem', outline: 'none' }
@@ -72,6 +83,11 @@ export default function ContactClient({ initialContact }: Props) {
           {saved && (
             <span className="text-sm flex items-center gap-1.5" style={{ color: '#4ade80' }}>
               ✓ Guardado correctamente
+            </span>
+          )}
+          {error && (
+            <span className="text-sm flex items-center gap-1.5" style={{ color: '#f87171' }}>
+              ✗ {error}
             </span>
           )}
         </div>

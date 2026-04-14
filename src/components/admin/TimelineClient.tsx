@@ -18,6 +18,7 @@ export default function TimelineClient({ initialItems }: { initialItems: Timelin
     const body   = editing ? { ...form, id: editing.id } : form
     const res    = await fetch('/api/content/timeline', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
     const data   = await res.json()
+    if (!res.ok) { alert(`Error al guardar: ${data.error ?? res.statusText}`); setLoading(false); return }
     if (editing) setItems(is => is.map(i => i.id === editing.id ? data : i))
     else         setItems(is => [...is, data])
     setShowForm(false)
@@ -26,7 +27,8 @@ export default function TimelineClient({ initialItems }: { initialItems: Timelin
 
   async function remove(id: string) {
     if (!confirm('¿Eliminar?')) return
-    await fetch('/api/content/timeline', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    const res = await fetch('/api/content/timeline', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    if (!res.ok) { const d = await res.json(); alert(`Error al eliminar: ${d.error ?? res.statusText}`); return }
     setItems(is => is.filter(i => i.id !== id))
   }
 

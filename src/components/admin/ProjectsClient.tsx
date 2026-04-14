@@ -22,6 +22,7 @@ export default function ProjectsClient({ initialProjects }: Props) {
     const body   = editing ? { ...form, id: editing.id } : form
     const res    = await fetch('/api/content/projects', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...body, tags: typeof body.tags === 'string' ? (body.tags as string).split(',').map(t => t.trim()) : body.tags }) })
     const data   = await res.json()
+    if (!res.ok) { alert(`Error al guardar: ${data.error ?? res.statusText}`); setLoading(false); return }
     if (editing) setProjects(ps => ps.map(p => p.id === editing.id ? data : p))
     else         setProjects(ps => [...ps, data])
     setShowForm(false)
@@ -30,7 +31,8 @@ export default function ProjectsClient({ initialProjects }: Props) {
 
   async function remove(id: string) {
     if (!confirm('¿Eliminar este proyecto?')) return
-    await fetch('/api/content/projects', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    const res = await fetch('/api/content/projects', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    if (!res.ok) { const d = await res.json(); alert(`Error al eliminar: ${d.error ?? res.statusText}`); return }
     setProjects(ps => ps.filter(p => p.id !== id))
   }
 

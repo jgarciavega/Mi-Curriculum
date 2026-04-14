@@ -18,6 +18,7 @@ export default function SkillsClient({ initialSkills }: { initialSkills: Skill[]
     const body   = editing ? { ...form, id: editing.id } : form
     const res    = await fetch('/api/content/skills', { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
     const data   = await res.json()
+    if (!res.ok) { alert(`Error al guardar: ${data.error ?? res.statusText}`); setLoading(false); return }
     if (editing) setSkills(ss => ss.map(s => s.id === editing.id ? data : s))
     else         setSkills(ss => [...ss, data])
     setShowForm(false)
@@ -26,7 +27,8 @@ export default function SkillsClient({ initialSkills }: { initialSkills: Skill[]
 
   async function remove(id: string) {
     if (!confirm('¿Eliminar?')) return
-    await fetch('/api/content/skills', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    const res = await fetch('/api/content/skills', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) })
+    if (!res.ok) { const d = await res.json(); alert(`Error al eliminar: ${d.error ?? res.statusText}`); return }
     setSkills(ss => ss.filter(s => s.id !== id))
   }
 

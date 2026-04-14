@@ -1,5 +1,6 @@
 export const dynamic = 'force-dynamic'
 
+import { connection } from 'next/server'
 import Header from '@/components/cv/Header'
 import Hero from '@/components/cv/Hero'
 import Sections from '@/components/cv/Sections'
@@ -8,27 +9,26 @@ import { defaultProjects, defaultSkills, defaultTimeline, defaultEducation, defa
 import { createClient } from '@supabase/supabase-js'
 
 async function getSiteData() {
-  try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    )
-    const [projects, skills, timeline, education, contact] = await Promise.all([
-      supabase.from('projects').select('*').order('order'),
-      supabase.from('skills').select('*'),
-      supabase.from('timeline').select('*').order('order'),
-      supabase.from('education').select('*'),
-      supabase.from('contact').select('*').limit(1).single(),
-    ])
-    return {
-      projects:  projects.data?.length  ? projects.data  : defaultProjects,
-      skills:    skills.data?.length    ? skills.data    : defaultSkills,
-      timeline:  timeline.data?.length  ? timeline.data  : defaultTimeline,
-      education: education.data?.length ? education.data : defaultEducation,
-      contact:   contact.data           ?? defaultContact,
-    }
-  } catch {
-    return { projects: defaultProjects, skills: defaultSkills, timeline: defaultTimeline, education: defaultEducation, contact: defaultContact }
+  await connection()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
+  const [projects, skills, timeline, education, contact] = await Promise.all([
+    supabase.from('projects').select('*').order('order'),
+    supabase.from('skills').select('*'),
+    supabase.from('timeline').select('*').order('order'),
+    supabase.from('education').select('*'),
+    supabase.from('contact').select('*').limit(1).maybeSingle(),
+  ])
+
+  return {
+    projects:  projects.data?.length  ? projects.data  : defaultProjects,
+    skills:    skills.data?.length    ? skills.data    : defaultSkills,
+    timeline:  timeline.data?.length  ? timeline.data  : defaultTimeline,
+    education: education.data?.length ? education.data : defaultEducation,
+    contact:   contact.data           ?? defaultContact,
   }
 }
 

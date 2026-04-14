@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
       <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
       <p className="mb-8" style={{ color: 'var(--muted)' }}>Gestiona el contenido de tu portafolio.</p>
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {cards.map(c => (
           <Link key={c.label} href={c.href}
             className="p-6 rounded-2xl flex items-center gap-4 transition-all hover:scale-105"
